@@ -1,0 +1,24 @@
+root = true
+
+# Unix-style newlines with a newline ending every file
+[*]
+end_of_line = lf
+insert_final_newline = false
+
+[*.{js,py}]
+charset = utf-8
+indent_style = space
+indent_size = 2
+
+[SConstruct]
+charset = utf-8
+indent_style = space
+indent_size = 2
+
+[*.{c, h}]
+indent_style = space
+indent_size = 4
+
+[*.{yml, yaml}]
+indent_style = space
+indent_size = 2

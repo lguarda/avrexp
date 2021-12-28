@@ -1,0 +1,13 @@
+device: attiny88
+parameters:
+  F_CPU: 8000000UL
+  # lcd_command definition
+  LCD_DIR: DDRD
+  LCD_PORT: PORTD
+  LCD_RS: PD0
+  LCD_EN: PD1
+  # i2c definition
+  TW_DIR: DDRC
+  TW_PORT: PORTC
+  TW_SCL_PIN: PORTC5
+  TW_SDA_PIN: PORTC4
