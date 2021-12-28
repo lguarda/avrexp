@@ -1,6 +1,6 @@
 /*
-    LCD16x2 4 bit ATmega16 interface
-    http://www.electronicwings.com
+ * LCD16x2 4 bit ATmega16 interface
+ * http://www.electronicwings.com
 */
 
 
