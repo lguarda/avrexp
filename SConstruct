@@ -9,7 +9,9 @@ definition_parmeters = ['%s=%s' % (key, value) for (key, value) in definition['p
 
 device = definition['device']
 
-TARGET = 'build/main'
+TARGET = 'build/main.elf'
+TARGET_HEX = 'build/main.hex'
+TARGET_INFO = 'build/main.info'
 
 env = Environment()
 
@@ -36,6 +38,9 @@ sources = [
     'src/lcd_command.c',
     ]
 
-Default(env.Program(target = TARGET + '.elf', source = sources))
-Default(env.Command(TARGET + '.hex', TARGET + '.elf', env['OBJCOPY'] + ' -j .text -j .data -O ihex $SOURCE $TARGET'))
-Default(env.Command(None, TARGET + '.elf', env['SIZE'] + ' -C --mcu=' + device + ' $SOURCE'))
+Default(env.Program(target = TARGET, source = sources))
+Default(env.Command(TARGET_HEX, TARGET, env['OBJCOPY'] + ' -j .text -j .data -O ihex $SOURCE $TARGET'))
+Default(env.Command(TARGET_INFO, TARGET, env['SIZE'] + ' -C --mcu=' + device + ' $SOURCE | tee $TARGET'))
+flash = env.Command(None, [TARGET_HEX, TARGET_INFO], 'avrdude -c um232h -p attiny88 -v -U flash:w:' + TARGET_HEX)
+
+env.Alias('flash', flash)
