@@ -25,7 +25,7 @@ env['CXX'] = 'avr-g++'
 env['AS'] = 'avr-gcc'
 env['OBJCOPY'] = 'avr-objcopy'
 env['SIZE'] = 'avr-size'
-env.Append(CCFLAGS = '-Os -Wall -Werror')
+env.Append(CCFLAGS = '-Os -Wall -Werror -Wno-array-bounds')
 env.Append(CCFLAGS = '-mmcu=' + device)
 env.Append(LINKFLAGS = '-mmcu=' + device)
 # env.Append(LINKFLAGS = '-Wl,-u,vfprintf -lprintf_min')
@@ -36,6 +36,7 @@ sources = [
     'src/running_i2c.c',
     'src/twi_master.c',
     'src/lcd_command.c',
+    'src/mcp23017.c',
     ]
 
 Default(env.Program(target = TARGET, source = sources))
